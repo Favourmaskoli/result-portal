@@ -33,6 +33,15 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "polls.apps.PollsConfig",
+    "account.apps.AccountConfig",
+    "schools.apps.SchoolsConfig",
+    "staff.apps.StaffConfig",
+    "student.apps.StudentConfig",
+    "result.apps.ResultConfig",
+    "core.apps.CoreConfig",
+    "payment.apps.PaymentConfig",
+    "analytics.apps.AnalyticsConfig",
+    "notifications.apps.NotificationsConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

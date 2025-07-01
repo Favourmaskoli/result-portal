@@ -20,5 +20,14 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('polls/', include('polls.urls')),
-    path('account/', include('account.urls'))
+    path('account/', include('account.urls')),
+    path('core/', include('core.urls')),
+    path('payment/', include('payment.urls')),
+    path('schools/', include('schools.urls')),
+    path('result/', include('result.urls')),
+    path('staff/', include('staff.urls')),
+    path('student/', include('student.urls')),
+    path('subjects/', include('subjects.urls')),
+    path('notifications/', include('notifications.urls')),
+    path('analytics/', include('analytics.urls')),
 ]
