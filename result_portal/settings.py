@@ -28,12 +28,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Application definition
 
 INSTALLED_APPS = [
     "polls.apps.PollsConfig",
-    "account.apps.AccountConfig",
+    "accounts.apps.AccountsConfig",
     "schools.apps.SchoolsConfig",
     "staff.apps.StaffConfig",
     "student.apps.StudentConfig",
@@ -131,3 +133,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email settings
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" 
