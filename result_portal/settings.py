@@ -28,31 +28,86 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 # Application definition
 
 INSTALLED_APPS = [
     "polls.apps.PollsConfig",
     "accounts.apps.AccountsConfig",
-    "schools.apps.SchoolsConfig",
+    "school.apps.SchoolConfig",
     "staff.apps.StaffConfig",
     "student.apps.StudentConfig",
     "result.apps.ResultConfig",
-    "core.apps.CoreConfig",
-    "payment.apps.PaymentConfig",
-    "analytics.apps.AnalyticsConfig",
-    "notifications.apps.NotificationsConfig",
+    "subject.apps.SubjectConfig",
+    # "payment.apps.PaymentConfig",
+    # "analytics.apps.AnalyticsConfig",
+    # "notifications.apps.NotificationsConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',  
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.github',
+    # 'allauth.socialaccount.providers.linkedin',
+    'allauth.socialaccount.providers.microsoft',
+    'allauth.socialaccount.providers.apple',
+    'allauth.socialaccount.providers.instagram',
+    'allauth.socialaccount.providers.gitlab',
+    # 'allauth.socialaccount.providers.bitbucket',
+    'allauth.socialaccount.providers.slack',
+    'allauth.socialaccount.providers.discord',
+    'allauth.socialaccount.providers.twitch',
+    'allauth.socialaccount.providers.spotify',
+    'allauth.socialaccount.providers.yahoo',
+    'allauth.socialaccount.providers.paypal',
+    'allauth.socialaccount.providers.amazon',
+    'allauth.socialaccount.providers.dropbox',
+    'allauth.socialaccount.providers.salesforce',
+    'allauth.socialaccount.providers.stripe',
+    # 'allauth.socialaccount.providers.paystack',
+    # 'allauth.socialaccount.providers.flutterwave',
+    # 'allauth.socialaccount.providers.razorpay',
+    # 'allauth.socialaccount.providers.paytm',
+    # 'allauth.socialaccount.providers.square',
+    # 'allauth.socialaccount.providers.wepay',
+    # 'allauth.socialaccount.providers.braintree',
+    # 'allauth.socialaccount.providers.coinbase',
+    # 'allauth.socialaccount.providers.venmo',
+    # 'allauth.socialaccount.providers.zendesk',
+    # 'allauth.socialaccount.providers.shopify',
+    # 'allauth.socialaccount.providers.mailchimp',
+    # 'allauth.socialaccount.providers.mailgun',
+    # 'allauth.socialaccount.providers.sendgrid',
+    # 'allauth.socialaccount.providers.twilio',
+    # 'allauth.socialaccount.providers.cloudflare',
+    # 'allauth.socialaccount.providers.heroku',
+    # 'allauth.socialaccount.providers.digitalocean',
+    # 'allauth.socialaccount.providers.linode',
+    # 'allauth.socialaccount.providers.vultr',
+    # 'allauth.socialaccount.providers.heroku',
+    # 'allauth.socialaccount.providers.cloudflare',
 ]
 
+# authentication backends
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Default authentication backend
+    'allauth.account.auth_backends.AuthenticationBackend',  # Allauth authentication backend
+]
+
+SITE_ID = 1
+
 MIDDLEWARE = [
+    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -67,7 +122,7 @@ ROOT_URLCONF = 'result_portal.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'core/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,6 +183,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'core/static'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

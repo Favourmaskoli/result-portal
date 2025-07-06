@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+Hi {{ user.username }}!
+
+{% else %}
+<p>You are not logged in</p>
+<p><a href="{% url 'account_login' %}">Login</a> or <a href="{% url 'account_signup' %}">Sign up</a></p>
+{% endif %}
+
+{% if user.is_authenticated %}
+<p>Welcome back, {{ user.username }}!</p>
+<p>Your email is: {{ user.email }}</p>
+<p><a href="{% url 'account_logout' %}">Logout</a></p>
+{% else %}
+<p>You are not logged in.</p>
+<p><a href="{% url 'account_login' %}">Login</a> or <a href="{% url 'account_signup' %}">Sign up</a></p>
+{% endif %}
+{% endblock %}
