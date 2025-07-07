@@ -11,7 +11,7 @@ class Student(models.Model):
     middle_name = models.CharField(max_length=30, blank=True, null=True)
     last_name = models.CharField(max_length=30)
     email = models.EmailField(unique=True)
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(null=True, blank=True)
     enrollment_date = models.DateField(auto_now_add=True)
 
     def __str__(self):
