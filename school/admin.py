@@ -1,5 +1,4 @@
 from django.contrib import admin
-from typing import Set
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
@@ -10,15 +9,17 @@ class CustomUserAdmin(UserAdmin):
     def get_form(self, request, obj = None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
         is_superuser = request.user.is_superuser
-        disables_fields:Set[str] = set()
-        if not is_superuser:
+        disabled_fields:set[str] = set()
+        if(not is_superuser and obj is not None and obj==request.user):
             # form.base_fields['username'].disabled = True
-            disables_fields |= {
+            disabled_fields |= {
                 'is_superuser',
                 'username',
                 'is_staff',
+                'user_permissions',
+                'groups',
             }
-        for field in disables_fields:
+        for field in disabled_fields:
             if field in form.base_fields:
                 form.base_fields[field].disabled = True
         return form
