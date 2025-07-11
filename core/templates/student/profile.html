@@ -1,0 +1,45 @@
+{# Student Profile Page #}
+{% extends "base.html" %}
+
+{% block title %}Student Profile{% endblock %}
+{% load static %}
+{% block styles %}
+<style>
+  body {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .profile-info {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  .profile-info h3 {
+    margin-top: 0;
+  }
+  .profile-info p {
+    margin: 5px 0;
+  }
+  .profile-info .label {
+    font-weight: bold;
+    color: #5bc0de;
+  }
+  .profile-info .value {
+    font-weight: bold;
+    color: #d9534f;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<h2>Your Profile</h2>
+<p>Here you can view and edit your profile information.</p>
+<div class="profile-info">
+  <h3>Profile Information</h3>
+  <p><span class="label">Name:</span> <span class="value">Favour</span></p>
+  <p><span class="label">Email:</span> <span class="value">favour@example.com</span></p>
+  <p><span class="label">Student ID:</span> <span class="value">S123456</span></p>
+</div>
+{% endblock %}
+

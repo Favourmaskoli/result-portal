@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  .sidebar {
+    background-color: #1e1e1e;
+    min-height: 100vh;
+  }
+  .sidebar a {
+    color: #fff;
+    display: block;
+    padding: 1rem;
+    text-decoration: none;
+  }
+  .sidebar a:hover,
+  .sidebar .active {
+    background-color: #333;
+    border-radius: 0.5rem;
+  }
+  .dashboard-card {
+    background-color: #1f1f1f;
+    color: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+  .profile-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+  }
+</style>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-2 sidebar p-3">
+      <h4 class="mb-4">Student</h4>
+      <a href="{% url 'student:student_index' %}" class="active">Home</a>
+      <a href="{% url 'student:student_profile' %}">Profile</a>
+      <a href="{% url 'student:student_results' %}">Results</a>
+      <a href="{% url 'student:student_tasks' %}">Tasks</a>
+      <a href="{% url 'student:student_logout' %}">Logout</a>
+    </div>
+
+    <!-- Main content -->
+    <div class="col-md-10 p-4">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h2>Welcome, Favour</h2>
+        </div>
+        <img src="{% static 'images/profile.jpg' %}" alt="Profile" class="profile-img">
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="dashboard-card">
+            <h5>Current GPA</h5>
+            <h2>3.8</h2>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="dashboard-card">
+            <h5>Upcoming Assignments</h5>
+            <h2>3</h2>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="dashboard-card">
+            <h5>Recent Results</h5>
+            <h2>A-</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

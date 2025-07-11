@@ -30,7 +30,7 @@ urlpatterns = [
     # path('schools/', include('schools.urls')),
     # path('result/', include('result.urls')),
     # path('staff/', include('staff.urls')),
-    # path('student/', include('student.urls')),
+    path('student/', include('student.urls')),
     # path('subjects/', include('subjects.urls')),
     # path('notifications/', include('notifications.urls')),
     # path('analytics/', include('analytics.urls')),

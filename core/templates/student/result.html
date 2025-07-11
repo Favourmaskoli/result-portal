@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}Student Result Portal{% endblock %}
+{% block heading %}Welcome to Your Result Dashboard{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+  <div class="row">
+    <!-- Profile / Session Info -->
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          Student Information
+        </div>
+        <div class="card-body">
+          <p><strong>Name:</strong> Maskoli Favour</p>
+          <p><strong>Class:</strong> Js 1</p>
+          <p><strong>Session:</strong> 2023/2024</p>
+          <p><strong>Term:</strong> First Term</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result Summary -->
+    <div class="col-md-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+          Subject Results
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="table table-striped mb-0">
+              <thead class="table-light">
+                <tr>
+                  <th>Subject</th>
+                  <th>Test</th>
+                  <th>Exam</th>
+                  <th>Total</th>
+                  <th>Grade</th>
+                  <th>Remark</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Result_subject</td>
+                  <td>Test_score</td>
+                  <td>Exam_score</td>
+                  <td>Total</td>
+                  <td>grade</td>
+                  <td>Remark</td>
+                </tr>
+                <tr>
+                  <td colspan="6" class="text-center">No results found for this term.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comments and Signatures -->
+  <div class="row mt-4">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white">Teacher's Comment</div>
+        <div class="card-body">
+          <p>Teacher_comment</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">Headmaster's Comment</div>
+        <div class="card-body">
+          <p>headmaster_comment</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{# Student Results Page #}
+{% extends "base.html" %}
+
+{% block title %}Student Results{% endblock %}
+
+{% block content %}
+<h2>Your Results</h2>
+<p>Here you can view your academic results.</p>
+<li>
+    <a href="{% url 'student:student_result_details' %}">View Detailed Result 1</a>
+</li>
+{% endblock %}
+<style>
+  body {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .result-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  .result-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  .result-item h3 {
+    margin-top: 0;
+  }
+  .result-item p {
+    margin: 5px 0;
+  }
+  .result-item .subject {
+    font-weight: bold;
+    color: #5bc0de;
+  }
+  .result-item .grade {
+    font-weight: bold;
+    color: #d9534f;
+  }
+</style>

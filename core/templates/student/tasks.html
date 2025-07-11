@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Student Tasks{% endblock %}
+
+{% block content %}
+<h2>Your Tasks</h2>
+<p>Here you can view and manage your tasks.</p>
+{% endblock %}
+<style>
+  body {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .task-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  .task-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  .task-item h3 {
+    margin-top: 0;
+  }
+  .task-item p {
+    margin: 5px 0;
+  }
+  .task-item .due-date {
+    font-weight: bold;
+    color: #d9534f;
+  }
+  .task-item .status {
+    font-weight: bold;
+    color: #5bc0de;
+  }
+</style>
