@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'student:student_index'
 LOGOUT_REDIRECT_URL = 'home'
 
 # Application definition

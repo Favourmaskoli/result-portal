@@ -6,7 +6,7 @@
 {% block content %}
 <style>
   body {
-    background-color: #121212;
+    background-color: #f0f0f0;
     color: #ffffff;
   }
   .sidebar {
@@ -50,15 +50,21 @@
       <a href="{% url 'student:student_profile' %}">Profile</a>
       <a href="{% url 'student:student_results' %}">Results</a>
       <a href="{% url 'student:student_tasks' %}">Tasks</a>
-      <a href="{% url 'student:student_logout' %}">Logout</a>
+      <a href="{% url 'account_logout' %}">Logout</a>
     </div>
 
     <!-- Main content -->
     <div class="col-md-10 p-4">
       <div class="d-flex justify-content-between align-items-center mb-4">
+        {% if user.is_authenticated %}
         <div>
-          <h2>Welcome, Favour</h2>
+          <h2>Welcome, {{ student.first_name }}</h2>
         </div>
+        {% else %}
+        <div>
+          <h2>Welcome to the Student Dashboard</h2>
+        </div>
+        {% endif %}
         <img src="{% static 'images/profile.jpg' %}" alt="Profile" class="profile-img">
       </div>
 

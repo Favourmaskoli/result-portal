@@ -2,6 +2,8 @@ from accounts import views
 from django.urls import path
 from django.views.generic import TemplateView
 
+app_name = 'accounts'
+
 urlpatterns = [
     path('signup', views.SignUp.as_view(), name='signup'),
     # path('password_change_done', views.PasswordChange.as_view(), name='password_change_done'),
