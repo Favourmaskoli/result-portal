@@ -46,8 +46,9 @@ def get_sessions(start_year):
     years = list(range(start_year, current_year + 1))
     return [((f"{y}/{y+1}"), f"{y}/{y+1}") for y in years]
 
+school = School.objects.first()
 class Session(models.Model):
-    session_year = models.CharField(max_length=9, choices=get_sessions(2000))
+    session_year = models.CharField(max_length=9, choices=get_sessions(school.established_date.year), unique=True)
 
     def __str__(self):
         return self.session_year
