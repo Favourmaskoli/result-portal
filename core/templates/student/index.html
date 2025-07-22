@@ -48,8 +48,9 @@
       <h4 class="mb-4">Student</h4>
       <a href="{% url 'student:student_index' %}" class="active">Home</a>
       <a href="{% url 'student:student_profile' %}">Profile</a>
-      <a href="{% url 'student:student_results' %}">Results</a>
+      <a href="{% url 'student:student_result_details' %}">Results</a>
       <a href="{% url 'student:student_tasks' %}">Tasks</a>
+      <a href="{% url 'result:index' %}">Index</a>
       <a href="{% url 'account_logout' %}">Logout</a>
     </div>
 

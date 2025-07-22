@@ -1,4 +1,3 @@
-{# Student Results Page #}
 {% extends "base.html" %}
 
 {% block title %}Student Results{% endblock %}
@@ -6,9 +5,30 @@
 {% block content %}
 <h2>Your Results</h2>
 <p>Here you can view your academic results.</p>
-<li>
-    <a href="{% url 'student:student_result_details' %}">View Detailed Result 1</a>
-</li>
+
+<form action="{% url 'student:student_result_details' %}" method="get" class="row g-2">
+  <div class="col-md-6">
+    <select name="term" class="form-select" required>
+      <option value="" disabled selected>Select Term</option>
+      {% for t in terms %}
+        <option value="{{ t.id }}">{{ t.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-6">
+    <select name="session" class="form-select" required>
+      <option value="" disabled selected>Select Session</option>
+      {% for s in sessions %}
+        <option value="{{ s.id }}">{{ s.session_year }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary mt-2">View Result</button>
+  </div>
+</form>
+
+
 {% endblock %}
 <style>
   body {

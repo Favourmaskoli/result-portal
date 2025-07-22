@@ -26,6 +26,8 @@ SECRET_KEY = 'django-insecure-@g@=aj8a+zk%sld)c!*#9tr)wcg+jot*i_r6ds1akiopm-+v+1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# AUTH_USER_MODEL = 'accounts.CustomUser'
+
 ALLOWED_HOSTS = []
 
 LOGIN_REDIRECT_URL = 'student:student_index'
