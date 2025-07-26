@@ -9,6 +9,7 @@ class Subject(models.Model):
     code = models.CharField(max_length=10, unique=True)
     description = models.TextField(blank=True, null=True)
     school = models.ForeignKey(School, on_delete=models.CASCADE, related_name='subjects', editable=False)
+    total_marks = models.DecimalField(max_digits=100, decimal_places=2, default=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

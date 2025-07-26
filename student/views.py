@@ -17,19 +17,6 @@ def index(request):
     print(student.school)
     return render(request, 'student/index.html', {'student': student})
 
-# def profile(request):
-#     """
-#     Render the student profile page.
-#     """
-#     student = request.user.student if hasattr(request.user, 'student') else None
-#     form = StudentProfileForm(request.POST, instance=request.user)
-#     if request.method == 'POST':
-#         form = StudentProfileForm(request.POST, instance=request.user)
-#         if form.is_valid():
-#             form.save()
-#             return render(request, 'student/profile.html', {'form': form, 'success': True})
-#     return render(request, 'student/profile.html', {'form': form})
-
 @login_required
 def create_student_profile(request):
     """
@@ -67,17 +54,3 @@ def logout_view(request):
     Handle student logout.
     """
     return render(request, 'student/logout.html', {} )
-
-@login_required
-def result_details(request):
-    """
-    Render the student result details page.
-    """
-    terms = Term.objects.all()
-    sessions = Session.objects.all()
-
-    context = {
-        'terms': terms,
-        'sessions': sessions
-    }
-    return render(request, 'student/results.html', context)

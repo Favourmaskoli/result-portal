@@ -8,11 +8,31 @@ class Result(models.Model):
     level = models.ForeignKey(Level, on_delete=models.CASCADE, related_name='results', null=True, blank=True)
     term = models.ForeignKey(Term, on_delete=models.CASCADE, related_name='results', null=True, blank=True)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='results', null=True, blank=True)
-    score = models.DecimalField(max_digits=5, decimal_places=2)
-    date_taken = models.DateField()
+    mark_obtained = models.DecimalField(max_digits=100, decimal_places=2, default=0)
+    date_taken = models.DateField(auto_now=True)
 
     def __str__(self):
         return f"{self.student} - {self.subject}: {self.score}"
+    
+    def percentage_score(self):
+        if self.subject.total_marks:
+            return round((self.mark_obtained / self.subject.total_marks) * 100, 2)
+        return 0
+    
+    def grade(self):
+        percentage_score = self.percentage_score()
+        if percentage_score >= 70:
+            return "A"
+        if percentage_score >= 60:
+            return "B"
+        if percentage_score >= 50:
+            return "C"
+        if percentage_score >= 45:
+            return "D"
+        if percentage_score >= 40:
+            return "E"
+        else:
+            return "F"
 
     class Meta:
         verbose_name = "Result"

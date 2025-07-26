@@ -6,12 +6,12 @@
 <h2>Your Results</h2>
 <p>Here you can view your academic results.</p>
 
-<form action="{% url 'student:student_result_details' %}" method="get" class="row g-2">
+<form action="{% url 'result:result_detail' %}" method="get" class="row g-2">
   <div class="col-md-6">
     <select name="term" class="form-select" required>
       <option value="" disabled selected>Select Term</option>
       {% for t in terms %}
-        <option value="{{ t.id }}">{{ t.name }}</option>
+        <option name="q" value="{{ t.id }}">{{ t.name }}</option>
       {% endfor %}
     </select>
   </div>
@@ -19,7 +19,7 @@
     <select name="session" class="form-select" required>
       <option value="" disabled selected>Select Session</option>
       {% for s in sessions %}
-        <option value="{{ s.id }}">{{ s.session_year }}</option>
+        <option name="q" value="{{ s.id }}">{{ s.session_year }}</option>
       {% endfor %}
     </select>
   </div>
