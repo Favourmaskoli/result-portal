@@ -12,7 +12,7 @@ class Result(models.Model):
     date_taken = models.DateField(auto_now=True)
 
     def __str__(self):
-        return f"{self.student} - {self.subject}: {self.score}"
+        return f"{self.student} - {self.subject}: {self.mark_obtained} - {self.term}"
     
     def percentage_score(self):
         if self.subject.total_marks:
@@ -22,17 +22,17 @@ class Result(models.Model):
     def grade(self):
         percentage_score = self.percentage_score()
         if percentage_score >= 70:
-            return "A"
+            return "A", "Excellent"
         if percentage_score >= 60:
-            return "B"
+            return "B", "Very Good"
         if percentage_score >= 50:
-            return "C"
+            return "C", "Good"
         if percentage_score >= 45:
-            return "D"
+            return "D", "Fair"
         if percentage_score >= 40:
-            return "E"
+            return "E", "Pass"
         else:
-            return "F"
+            return "F", "Fail"
 
     class Meta:
         verbose_name = "Result"

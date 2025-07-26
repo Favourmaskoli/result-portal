@@ -1,4 +1,4 @@
-<!-- {% extends "base.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load i18n %}
 
@@ -8,8 +8,8 @@
 {% block content %}
 <div class="container my-4">
   <div class="row">
-    <!-- Profile / Session Info -->
-    <div class="col-md-4">
+    <!-- Student Information -->
+    <div class="col-md-4 mb-4">
       <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
           Student Information
@@ -17,18 +17,18 @@
         {% if results %}
         <div class="card-body">
           {% with first_result=results.0 %}
-          <p><strong>Name:</strong> {{first_result.student}}</p>
-          <p><strong>Class:</strong> {{first_result.level}}</p>
-          <p><strong>Session:</strong> {{first_result.session}}</p>
-          <p><strong>Term:</strong> {{first_result.term}}</p>
+            <p><strong>Name:</strong> {{ first_result.student }}</p>
+            <p><strong>Class:</strong> {{ first_result.level }}</p>
+            <p><strong>Session:</strong> {{ session }}</p>
+            <p><strong>Term:</strong> {{ term }}</p>
           {% endwith %}
         </div>
         {% endif %}
       </div>
     </div>
 
-    <!-- Result Summary -->
-    <div class="col-md-8">
+    <!-- Subject Results -->
+    <div class="col-md-8 mb-4">
       <div class="card shadow-sm">
         <div class="card-header bg-success text-white">
           Subject Results
@@ -36,59 +36,76 @@
         <div class="card-body p-0">
           <div class="table-responsive">
             <table class="table table-striped mb-0">
+              {% if results %}
               <thead class="table-light">
-                {% if results %}
                 <tr>
                   <th>Subject</th>
                   <th>Test</th>
                   <th>Exam</th>
-                  <th>Total</th>
+                  <th>Expected score</th>
                   <th>Grade</th>
                   <th>Remark</th>
                 </tr>
               </thead>
-              {% for result in results %}
+              <tbody>
+                {% for result in results %}
+                  {% with grade=result.grade %}
+                  <tr>
+                    <td>{{ result.subject.name }}</td>
+                    <td>--</td> <!-- Placeholder: Add test score if available -->
+                    <td>{{ result.mark_obtained }}</td>
+                    <td>{{ result.subject.total_marks }}</td>
+                    <td>{{ grade.0 }}</td>
+                    <td>{{ grade.1 }}</td>
+                  </tr>
+                  {% endwith %}
+                {% endfor %}
+              </tbody>
+              {% else %}
               <tbody>
                 <tr>
-                  <td>{{result.subject}}</td>
-                  <td>{{result.test_score}}</td>
-                  <td>{{result.exam_score}}</td>
-                  <td>{{result.total}}</td>
-                  <td>{{result.grade}}</td>
-                  <td>{{result.remark}}</td>
+                  <td colspan="6" class="text-center p-4">No results found for this term.</td>
                 </tr>
-                {% endfor %}
-                {% else %}
-                <tr>
-                  <td colspan="6" class="text-center">No results found for this term.</td>
-                </tr>
-                {% endif %}
               </tbody>
+              {% endif %}
             </table>
           </div>
         </div>
       </div>
+
+      <!-- Summary Section -->
+      {% if results %}
+      <div class="card shadow-sm mt-3">
+        <div class="card-body">
+          <h5>Result Summary</h5>
+          <p><strong>Total Marks Obtained:</strong> {{ total_marks_obtained }}</p>
+          <p><strong>Percentage:</strong> {{ score_percentage }}%</p>
+          <p><strong>Grade:</strong> {{ result_grade }}</p>
+          <p><strong>Remark:</strong> {{ result_remark }}</p>
+        </div>
+      </div>
+      {% endif %}
     </div>
   </div>
 
-  <!-- Comments and Signatures -->
+  <!-- Comments -->
   <div class="row mt-4">
-    <div class="col-md-6">
+    <div class="col-md-6 mb-4">
       <div class="card shadow-sm">
         <div class="card-header bg-secondary text-white">Teacher's Comment</div>
         <div class="card-body">
-          <p>Teacher_comment</p>
+          <p>{{ teacher_comment|default:"No comment available" }}</p>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 mb-4">
       <div class="card shadow-sm">
         <div class="card-header bg-dark text-white">Headmaster's Comment</div>
         <div class="card-body">
-          <p>headmaster_comment</p>
+          <p>{{ headmaster_comment|default:"No comment available" }}</p>
         </div>
       </div>
     </div>
   </div>
 </div>
-{% endblock %} 
+{% endblock %}

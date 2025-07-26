@@ -65,18 +65,25 @@ def result_detail(request):
     if not term_id or not session_id:
         return redirect('result:result')
     results = Result.objects.filter(student=student, term_id=term_id, session_id=session_id)
+    # for result in results:
+    #     subject = result.subject
+    #     subject_grade, subject_remark = result.grade()
     total_marks_obtained = sum([result.mark_obtained for result in results], Decimal("0.00"))
-    print(total_marks_obtained)
     total_marks_expected = sum([result.subject.total_marks for result in results], Decimal("0.00"))
     percentage = results_percentage(total_marks_expected, total_marks_obtained)
     grade, remark = get_grade_remark(percentage)
 
     context = {
         'results': results,
-        'term': Term.objects.filter(id=term_id),
-        'session': Session.objects.filter(id=session_id),
-        'grade': grade,
-        'remark': remark,
+        'term': Term.objects.filter(id=term_id).first(),
+        'session': Session.objects.filter(id=session_id).first(),
+        'result_grade': grade,
+        'result_remark': remark,
+        # 'subject_grade': subject_grade,
+        # 'subject_remark': subject_remark,
+        'score_percentage': percentage,
+        # 'subject': subject,
+        'total_marks_obtained': total_marks_obtained,
     }
     return render(request, 'student/result.html', context)
 
