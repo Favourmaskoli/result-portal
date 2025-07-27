@@ -2,22 +2,87 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background-color: #f0f0f0;
+        color: #ffffff;
+      }
+      .sidebar {
+        background-color: #1e1e1e;
+        min-height: 100vh;
+      }
+      .sidebar a {
+        color: #fff;
+        display: block;
+        padding: 1rem;
+        text-decoration: none;
+      }
+      .sidebar a:hover,
+      .sidebar .active {
+        background-color: #333;
+        border-radius: 0.5rem;
+      }
+      .dashboard-card {
+        background-color: #1f1f1f;
+        color: #fff;
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+      }
+      .profile-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #fff;
+      }
+</style>
     <title>{% block title %}Result Portal{% endblock %}</title>
   </head>
   <body>
     <div class="container">
-      {% block content %}
-      <!-- Content goes here -->
-      {% endblock %}
+      <div class="row">
+        <nav class="col-md-2 sidebar p-3 bg-secondary">
+          <h4 class="mb-4">Student</h4>
+          <a href="{% url 'student:student_index' %}" class="{% if request.resolver_match.url_name == 'student_index' %}active{% endif %}">Home</a>
+          <a href="{% url 'student:student_profile' %}" class="d-block mb-2" class="{% if request.resolver_match.url_name == 'student_profile' %}active{% endif %}">Profile</a>
+          <a href="{% url 'result:result' %}" class="d-block mb-2" class="{% if request.resolver_match.url_name == 'result' %}active{%endif%}">Results</a>
+          <a href="{% url 'student:student_tasks' %}" class="d-block mb-2" class="{% if request.resolver_match.url_name == 'student_tasks' %}active{% endif %}">Tasks</a>
+          {% if user.is_staff %}
+          <a href="{% url 'result:index' %}" class="d-block mb-2" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">Index</a>
+          {% endif %}
+          <a href="{% url 'account_logout' %}" class="d-block">Logout</a>
+        </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        <main class="col-md-10">
+          {% block content %}
+          <!-- Content goes here -->
+          {% endblock %}
+        </main>
+      </div>
+    </div>
 
+    <!-- Bootstrap JS + Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>

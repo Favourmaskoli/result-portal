@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from student.forms import StudentProfileForm
 from student.models import Student
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from result.models import Term, Session
 from django.contrib.auth.decorators import login_required
 
@@ -22,7 +22,12 @@ def create_student_profile(request):
     """
     Create a student profile if it does not exist.
     """
-    student = Student.objects.filter(user=request.user).first()
+    try:
+        student = Student.objects.get(user=request.user)
+        return redirect('student:update_profile')
+    except Student.DoesNotExist:
+        pass
+
     if request.method == 'POST':
         form = StudentProfileForm(request.POST)
         if form.is_valid():
@@ -30,6 +35,18 @@ def create_student_profile(request):
             student.user = request.user
             student.save()
             return render(request, 'student/profile.html', {'form': form, 'success': True, 'student': student})
+    else:
+        form = StudentProfileForm()
+    return render(request, 'student/profile.html', {'form': form, 'student': student})
+
+def update_student(request):
+    """update student profile"""
+    student = get_object_or_404(Student, user=request.user)
+    if request.method == "POST":
+        form = StudentProfileForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('student:student_profile')
     else:
         form = StudentProfileForm(instance=student)
     return render(request, 'student/profile.html', {'form': form, 'student': student})

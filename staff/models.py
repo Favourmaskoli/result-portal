@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from school.models import School
+from result.models import Result
 
 def get_default_school():
-    return School.objects.first() if School.objects.exists() else None  
+    return School.objects.first() if School.objects.exists() else None 
 
 class Staff(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -20,6 +21,14 @@ class Staff(models.Model):
             self.school = get_default_school()
         super().save(*args, **kwargs)
 
+    @property
+    def is_principal(self):
+        return True
+    
+    @property
+    def is_teacher(self):
+        return True
+
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name} - {self.position}"
@@ -28,3 +37,13 @@ class Staff(models.Model):
         verbose_name = "Staff"
         verbose_name_plural = "Staff"
         ordering = ['user__last_name', 'user__first_name']
+
+# class StaffComment(models.Model):
+#     result = models.OneToOneField(Result, on_delete=models.CASCADE)
+#     staff = models.OneToOneField(Staff, on_delete=models.CASCADE) 
+
+# class PrincipalComment(models.Model):
+#     result = models.OneToOneField(Result, on_delete=models.CASCADE)
+#     staff = models.OneToOneField(Staff, on_delete=models.CASCADE)
+
+
