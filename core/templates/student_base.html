@@ -53,6 +53,15 @@
   <body>
     <div class="container">
       <div class="row">
+        <nav class="col-md-2 sidebar p-3 bg-secondary">
+          <h4 class="mb-4">Student</h4>
+            <a href="{% url 'student:student_index' %}" class="{% if request.resolver_match.url_name == 'student_index' %}active{% endif %}">Home</a>
+            <a href="{% url 'student:student_profile' %}" class="d-block mb-2" class="{% if request.resolver_match.url_name == 'student_profile' %}active{% endif %}">Profile</a>
+            <a href="{% url 'result:result' %}" class="d-block mb-2" class="{% if request.resolver_match.url_name == 'result' %}active{%endif%}">Results</a>
+            <a href="{% url 'student:student_tasks' %}" class="d-block mb-2" class="{% if request.resolver_match.url_name == 'student_tasks' %}active{% endif %}">Tasks</a>
+            <a href="{% url 'account_logout' %}" class="d-block">Logout</a>
+        </nav>
+
         <main class="col-md-10">
           {% block content %}
           <!-- Content goes here -->

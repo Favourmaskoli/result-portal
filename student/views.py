@@ -4,6 +4,7 @@ from student.models import Student
 from django.shortcuts import redirect, get_object_or_404
 from result.models import Term, Session
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 @login_required
@@ -46,6 +47,7 @@ def update_student(request):
         form = StudentProfileForm(request.POST, instance=student)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Profile updated successfully')
             return redirect('student:student_profile')
     else:
         form = StudentProfileForm(instance=student)

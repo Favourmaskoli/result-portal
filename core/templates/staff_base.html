@@ -54,7 +54,7 @@
   <!-- Sidebar -->
   <div class="sidebar d-flex flex-column p-3">
     <h4 class="text-center">Staff</h4>
-    <a href="#" class="active">Dashboard</a>
+    <a href="{% url 'staff:dashboard' %}" class="active">Dashboard</a>
     <a href="{% url 'staff:upload_result' %}">Upload Results</a>
     <a href="#">Manage Students</a>
     <a href="{% url 'account_logout' %}">Logout</a>
@@ -84,7 +84,11 @@
       <div class="col-md-4 mb-3">
         <div class="card-box">
           <h5>Total Students</h5>
-          <p class="fs-4">120</p>
+          {% if students %}
+            <p class="fs-4">{{students.count}}</p>
+          {% else %}
+            <p class="fs-4">No student available </p>
+          {% endif %}
         </div>
       </div>
       <div class="col-md-4 mb-3">

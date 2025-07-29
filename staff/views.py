@@ -3,6 +3,7 @@ from staff.models import Staff
 from django.contrib.auth.decorators import login_required
 from staff.forms import ResultsUploadForm
 from django.contrib import messages
+from student.models import Student
 
 # Create your views here.
 
@@ -15,7 +16,8 @@ def staff_dashboard(request):
         user = user
     context = {
         'staff': staff,
-        'user':user
+        'user':user,
+        'students': Student.objects.all()
     }
     return render(request, 'staff/staff_dashboard.html', context)
 
@@ -32,7 +34,8 @@ def upload_result(request):
     else:
         form = ResultsUploadForm()
     context = {
-        'form': form
+        'form': form,
+        'students': Student.objects.all()
     }
 
     return render(request, 'staff/upload_result.html', context)

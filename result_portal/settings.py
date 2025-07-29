@@ -31,6 +31,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
 
 # Application definition
 
@@ -111,7 +115,7 @@ DATABASES = {
 }
 
 LOGIN_REDIRECT_URL = reverse_lazy('accounts:login_redirect_path')
-LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'account_login'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

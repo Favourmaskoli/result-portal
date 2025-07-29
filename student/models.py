@@ -7,6 +7,7 @@ def get_default_school():
 
 class Student(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student_profile')
+    image = models.ImageField(upload_to='student/profile', default=('images/default.png'))
     school = models.ForeignKey(School, on_delete=models.CASCADE, related_name='students', editable=False)
     first_name = models.CharField(max_length=30)
     phone_number = models.CharField(max_length=15, blank=True, null=True)

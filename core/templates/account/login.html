@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<style>
+  .auth-container {
+    min-height: 100vh;
+  }
+
+  .auth-image {
+    background-image: url("{% static 'images/login-illustration.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.7);
+  }
+
+  .form-wrapper {
+    max-width: 400px;
+    width: 100%;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+
+  .auth-links {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .auth-links a {
+    display: block;
+    font-size: 0.9rem;
+    color: #fff;
+    text-decoration: underline;
+    margin-top: 5px;
+  }
+
+  @media (max-width: 768px) {
+    .auth-image {
+      display: none;
+    }
+  }
+</style>
+
+<div class="container-fluid auth-container d-flex p-0">
+  <!-- Left Image -->
+  <div class="col-md-6 auth-image"></div>
+
+  <!-- Right Form -->
+  <div class="col-md-6 d-flex align-items-center justify-content-center bg-dark text-white">
+    <div class="form-wrapper p-5">
+      <h2 class="mb-4 text-center">Sign In</h2>
+      <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="mb-3">
+            <label class="form-label">{{ field.label }}</label>
+            {{ field }}
+            {% if field.errors %}
+              <div class="text-danger small">{{ field.errors|striptags }}</div>
+            {% endif %}
+          </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+      </form>
+
+      <!-- Additional Links -->
+      <div class="auth-links">
+        <a href="{% url 'account_reset_password' %}">Forgot password?</a>
+        <a href="{% url 'account_signup' %}">Don’t have an account? Sign up</a>
+        <a href="{% url 'account_logout' %}">Logout</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
