@@ -6,8 +6,8 @@ from django.contrib.auth.decorators import login_required
 from school.models import Session, Term
 from decimal import Decimal
 
-def index(request):
-    return render(request, 'result/index.html')
+# def index(request):
+#     return render(request, 'result/index.html')
 
 
 class ResultSearch(ListView):

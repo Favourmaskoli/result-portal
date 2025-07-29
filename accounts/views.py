@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.views.generic import CreateView, UpdateView
@@ -22,3 +22,11 @@ class PasswordChange(UpdateView):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
         return context
+    
+def login_redirect_path(request):
+    """Redirect a user based on permission"""
+    user = request.user
+    if (user.is_staff or user.is_superuser):
+        return redirect('staff:dashboard')
+    else:
+        return redirect('student:student_index')

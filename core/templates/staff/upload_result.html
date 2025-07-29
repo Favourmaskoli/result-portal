@@ -1,0 +1,37 @@
+{% extends "staff_base.html" %}
+{% load static %}
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+<!-- Upload Form -->
+   <div class="container mt-5">
+        <div class="card shadow-lg">
+            <div class="card-header bg-dark text-white">
+                <h4 class="mb-0">Upload Student Result</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        {% for field in form %}
+                            <div class="col-md-6 mb-3">
+                                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                    <div class="text-danger small">
+                                        {{ field.errors|striptags }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary px-4">Submit Result</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
