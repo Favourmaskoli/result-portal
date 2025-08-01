@@ -31,8 +31,15 @@
     <!-- Subject Results -->
     <div class="col-md-8 mb-4">
       <div class="card shadow-sm">
+        {% if results %}
+          <div class="mb-3">
+            <a href="{% url 'result:download_result_pdf' %}?term={{term.id}}&session={{session.id}}" class="btn btn-secondary">
+              Download Result PDF
+            </a>
+          </div>
+        {% endif %}
         <div class="card-header bg-success text-white">
-          Subject Results
+          Student Results
         </div>
         <div class="card-body p-0">
           <div class="table-responsive">
